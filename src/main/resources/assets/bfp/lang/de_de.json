@@ -1,0 +1,42 @@
+{
+  "bfp.config.yacl_not_found.header": "Konfigurations API nicht installiert",
+  "bfp.config.yacl_not_found.description": "BFP nutzt die Konfigurationsbibliothek \"YetAnotherConfigLib\" um den Ingame-Konfigurations-Bildschirm zu generieren. Dies ist keine benötigte Abhängigkeit, muss jedoch installiert sein um die Konfiguration im Spiel anzupassen. Ansonsten muss die Konfiguration manuell in .minecraft/config/bfp.json angepasst werden",
+  "bfp.config.yacl_not_found.close": "Schließen",
+
+  "bfp.config.title": "BFP Konfiguration",
+  "bfp.config.category.general.name": "Allgemein",
+  "bfp.config.category.general.tooltip": "Allgemeine Einstellungen für alle Animationen",
+  "bfp.config.category.first_person_player.name": "Ego-Perspektive Spieler",
+  "bfp.config.category.first_person_player.tooltip": "Einstellungen für die Spieler Animationen in der Ego-Perspektive",
+
+  "bfp.config.option.enable_first_person_renderer.name": "Ego-Perspektive Animationen",
+  "bfp.config.option.enable_first_person_renderer.description": "Ob BFPs Ego-Perspektive Animationen genutzt werden sollen. Im Gegensatz zu den meisten anderen Animationen, wird hier der Vanilla Ego-Perspektive-Renderer überschrieben. Deaktiviere dies um den Vanilla Ego-Perspektive-Renderer zu nutzen oder um Kompatibilität mit Mods herzustellen die den Vanilla Ego-Perspektive-Renderer integrieren.",
+  "bfp.config.option.enable_first_person_renderer.enabled": "Aktiviert",
+  "bfp.config.option.enable_first_person_renderer.disabled": "Deaktiviert",
+
+  "bfp.config.group.first_person_camera_shake.name": "Kamera-Wackeln",
+  "bfp.config.group.first_person_camera_shake.description": "Einstellungen zum Anpassen der Intensität des Kamera-Wackeln.",
+  "bfp.config.option.first_person_camera_shake_intensity_master.name": "Basis Intensität",
+  "bfp.config.option.first_person_camera_shake_intensity_master.description": "Steuert die Intensität des Kamera-Wackeln aller Animationen.",
+  "bfp.config.option.first_person_camera_shake_intensity_movement.name": "Bewegungsintensität",
+  "bfp.config.option.first_person_camera_shake_intensity_movement.description": "Steuert die Intensität des Kamera-Wackeln durch Bewegungsanimationen, einschließlich Geh-Bewegung.",
+  "bfp.config.option.first_person_camera_shake_intensity_item_interactions.name": "Item-Interaktion Itensität",
+  "bfp.config.option.first_person_camera_shake_intensity_item_interactions.description": "Steuert die Intensität des Kamera-Wackeln bei Animationen durch Interaktion mit Items, einschließlich Angriffe und Abbauen.",
+
+  "bfp.config.group.first_person_arm_camera_damping.name": "Kamera Arm-Rotierung Dämpfung",
+  "bfp.config.group.first_person_arm_camera_damping.description": "Einstellungen zum Anpassen wie die Arme rotieren wenn die Kamera bewegt wird.",
+  "bfp.config.option.enable_first_person_arm_camera_damping.name": "Aktiviert",
+  "bfp.config.option.enable_first_person_arm_camera_damping.description": "Ob die Ego-Perspektive Arm Dämpfung aktiviert ist. Durch Deaktivieren dieser Option bewegen sich die Arme beim Bewegen der Kamera überhaupt nicht mehr.",
+  "bfp.config.option.first_person_arm_camera_damping_factor.name": "Dämpfungsfaktor",
+  "bfp.config.option.first_person_arm_camera_damping_factor.description": "Steuert, wie viel Reibung die Federanimation hat. Je höher die Dämpfung, desto weniger springt sie hin und her",
+  "bfp.config.option.first_person_arm_camera_stiffness_factor.name": "Steifungsfaktor Factor",
+  "bfp.config.option.first_person_arm_camera_stiffness_factor.description": "Steuert, wie schnell sich die Arme rotieren, um sich der Drehung der Kamera anzupassen",
+
+  "bfp.config.option.first_person_mining_speed.name": "Abbau-Animation Geschwindigkeits-Multiplikator",
+  "bfp.config.option.first_person_mining_speed.description": "Passt die Geschwindigkeit der Abbau-Animationen an. 1 ist normale Geschwindigkeit, 0,5 ist halb so schnell und 2 ist doppelt so schnell",
+
+  "bfp.config.group.first_person_map.name": "Karten-Items",
+  "bfp.config.group.first_person_map.description": "Einstellungen für die Anzeige und Animation von Karten-Items.",
+  "bfp.config.option.first_person_map_movement_animation_intensity.name": "Animationsintensität der Kartenbewegung",
+  "bfp.config.option.first_person_map_movement_animation_intensity.description": "Steuert die Intensität der Bewegungsanimationen beim Halten einer Karte. Eine geringere Intensität verbessert die Lesbarkeit der Karte."
+}

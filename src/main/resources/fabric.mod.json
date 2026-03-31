@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "id": "${mod_id}",
+  "version": "${mod_version}",
+
+  "name": "${mod_name}",
+  "description": "${mod_description}",
+  "authors": [
+    "GBXTeam"
+  ],
+  "license": "Custom",
+  "icon": "assets/bfp/icon.png",
+
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "org.gbxteam.betterview.BFPFabric"
+    ],
+    "modmenu": [
+      "org.gbxteam.betterview.sys.compat.ModMenuIntegration"
+    ],
+    "fabric-datagen": [
+      "org.gbxteam.betterview.BFPDataGenerator"
+    ]
+  },
+  "mixins": [
+    "${mod_id}-common.mixins.json",
+    "${mod_id}-fabric.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=${fabric_loader_version}",
+    "fabric-api": "*",
+    "minecraft": ">=${minecraft_version}"
+  }
+}

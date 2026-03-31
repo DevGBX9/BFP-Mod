@@ -1,0 +1,66 @@
+# Automatically build the project and run any configured tests for every push
+# and submitted pull request. This can help catch issues that only occur on
+# certain platforms or Java versions, and provides a first line of defence
+# against bad commits.
+
+name: build
+on: [pull_request, push]
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        java: [
+          21,    # Current Java LTS & minimum supported by Minecraft
+        ]
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v4
+
+      - name: setup jdk ${{ matrix.java }}
+        uses: actions/setup-java@v4
+        with:
+          java-version: ${{ matrix.java }}
+          distribution: 'microsoft'
+      - name: make gradle wrapper executable
+        if: ${{ runner.os != 'Windows' }}
+        run: chmod +x ./gradlew
+      - name: build
+        run: ./gradlew chiseledBuild
+      - name: extract version info
+        if: ${{ runner.os == 'Linux' && matrix.java == '21' }}
+        id: version
+        run: |
+          MOD_VERSION=$(grep 'mod.version' gradle.properties | head -1 | cut -d'=' -f2 | tr -d ' \r')
+          MC_VERSION=$(grep 'stonecutter active' stonecutter.gradle.kts | grep -oP '"[^"]+"' | tr -d '"')
+          echo "mod_version=$MOD_VERSION" >> $GITHUB_OUTPUT
+          echo "mc_version=$MC_VERSION" >> $GITHUB_OUTPUT
+      - name: prepare clean artifact
+        if: ${{ runner.os == 'Linux' && matrix.java == '21' }}
+        run: |
+          mkdir -p final_mod_jar
+          echo "🔍 Scanning all build outputs..."
+          find . -path "*/build/libs/*.jar" -type f | while read f; do echo "  Found: $f"; done
+          echo "---"
+          TARGET_JAR=$(find . -path "*/fabric/*/build/libs/bfp-fabric-*.jar" -type f -not -name "*-dev*" -not -name "*-sources*" -not -name "*-shadow*" | head -n 1)
+          if [ -z "$TARGET_JAR" ]; then
+            TARGET_JAR=$(find . -path "*/build/libs/bfp-fabric-*.jar" -type f -not -name "*-dev*" -not -name "*-sources*" -not -name "*-shadow*" | head -n 1)
+          fi
+          if [ -n "$TARGET_JAR" ]; then
+            echo "✅ Found the correct Fabric mod JAR: $TARGET_JAR"
+            ls -la "$TARGET_JAR"
+            cp "$TARGET_JAR" "final_mod_jar/BFP-v${{ steps.version.outputs.mod_version }}-${{ steps.version.outputs.mc_version }}-Fabric.jar"
+          else
+            echo "❌ ERROR: Could not locate bfp-fabric-*.jar in any build/libs directory!"
+            echo "Available jars:"
+            find . -path "*/build/libs/*.jar" -type f
+            exit 1
+          fi
+      - name: capture build artifacts
+        if: ${{ runner.os == 'Linux' && matrix.java == '21' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: Better First Person (BFP) ${{ steps.version.outputs.mod_version }} + ${{ steps.version.outputs.mc_version }}
+          path: final_mod_jar/*.jar

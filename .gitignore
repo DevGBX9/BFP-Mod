@@ -1,0 +1,27 @@
+### Gradle ###
+
+.gradle/
+build/
+out/
+classes/
+
+build.properties
+.architectury-transformer
+
+### IntelliJ IDEA ###
+.idea/
+.shelf/
+*.iml
+*.ipr
+*.iws
+
+### Minecraft ###
+.runs/
+run/
+
+# java
+
+hs_err_*.log
+replay_*.log
+*.hprof
+*.jfr

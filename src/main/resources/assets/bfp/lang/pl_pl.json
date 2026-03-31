@@ -1,0 +1,42 @@
+{
+  "bfp.config.yacl_not_found.header": "Konfiguracyjne API nie jest zainstalowane",
+  "bfp.config.yacl_not_found.description": "BFP używa biblioteki \"YetAnotherConfigLib\", by generować ustawienia w grze. Nie jest ona wymagana, ale musi być zainstalowana, aby zarządzać ustawieniami w grze. W przeciwnym wypadku zawsze możesz edytować ustawienia w .minecraft/config/bfp.json",
+  "bfp.config.yacl_not_found.close": "Zamknij",
+
+  "bfp.config.title": "Konfiguracja BFP",
+  "bfp.config.category.general.name": "Ogólne",
+  "bfp.config.category.general.tooltip": "Ogólne ustawienia dla wszystkich animacji",
+  "bfp.config.category.first_person_player.name": "Animacje Pierwszoosobowe",
+  "bfp.config.category.first_person_player.tooltip": "Ustawienia animacji pierwszoosobowych.",
+
+  "bfp.config.option.enable_first_person_renderer.name": "Animacje Pierwszoosobowe",
+  "bfp.config.option.enable_first_person_renderer.description": "Możesz wyłączyć lub włączyć animacje pierwszoosobowe. Ta modyfikacja zawiera kompletnie osobny silnik renderowania pierwszej osoby, który jest kompletnie inny od tego podstawowego. Wyłącz tą opcję, jeśli chcesz używać normalnych animacji lub potrzebujesz, aby jedna z twoich modyfikacja używała podstawowego silnika renderowania.",
+  "bfp.config.option.enable_first_person_renderer.enabled": "Włączone",
+  "bfp.config.option.enable_first_person_renderer.disabled": "Wyłączone",
+
+  "bfp.config.group.first_person_camera_shake.name": "Trzęsienie kamery",
+  "bfp.config.group.first_person_camera_shake.description": "Ustaw, jak mocne powinny być trzęsienia kamery.",
+  "bfp.config.option.first_person_camera_shake_intensity_master.name": "Intensywność Globalna",
+  "bfp.config.option.first_person_camera_shake_intensity_master.description": "Kontroluje intensywność kamery we wszystkich animacjach.",
+  "bfp.config.option.first_person_camera_shake_intensity_movement.name": "Intensywność Ruchu",
+  "bfp.config.option.first_person_camera_shake_intensity_movement.description": "Kontroluje intensywność animacji chodzenia.",
+  "bfp.config.option.first_person_camera_shake_intensity_item_interactions.name": "Intensywność Interakcji",
+  "bfp.config.option.first_person_camera_shake_intensity_item_interactions.description": "Kontroluje intensywność interakcji z przedmiotami, włączając animacje atakowania oraz kopania.",
+
+  "bfp.config.group.first_person_arm_camera_damping.name": "Ruch Ręki Podczas Obrotu",
+  "bfp.config.group.first_person_arm_camera_damping.description": "Ustawienie pozwalające ustawić ręke, kiedy kamera się obraca.",
+  "bfp.config.option.enable_first_person_arm_camera_damping.name": "Włączone",
+  "bfp.config.option.enable_first_person_arm_camera_damping.description": "Twoja ręka nie będzie się w ogóle ruszać podczas obrotu kamerą.",
+  "bfp.config.option.first_person_arm_camera_damping_factor.name": "Tłumienie Odbicia",
+  "bfp.config.option.first_person_arm_camera_damping_factor.description": "Kontroluje sprężystość animacji. Czym większa wartość, tym słabsze odbicie.",
+  "bfp.config.option.first_person_arm_camera_stiffness_factor.name": "Współczynnik Sztywności",
+  "bfp.config.option.first_person_arm_camera_stiffness_factor.description": "Kontroluje jak szybko animacja ruchu rąk ma pasować do obrotu kamery",
+
+  "bfp.config.option.first_person_mining_speed.name": "Przyśpieszenie Animacji Kopania",
+  "bfp.config.option.first_person_mining_speed.description": "Kontroluje animacje kopania. 1 oznacza normalną szybkość, 0.5 połowę wolniej, 2 oznacza dwa razy szybciej.",
+
+  "bfp.config.group.first_person_map.name": "Mapopodobne",
+  "bfp.config.group.first_person_map.description": "Pozwala na ustawienia w jaki sposób mają się wyświetlać itemy związane z mapą.",
+  "bfp.config.option.first_person_map_movement_animation_intensity.name": "Intensywność Animacji Ruchu Map",
+  "bfp.config.option.first_person_map_movement_animation_intensity.description": "Kontroluje intensywność animacji chodzenia podczas trzyamania mapy. Mniejsze wartości mogą poprawić czytelność mapy." 
+}

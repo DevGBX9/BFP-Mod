@@ -11,6 +11,7 @@ import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+/** BFP Core Entry Point. */
 public class BFPMain {
 
 	/** BFP Core Infrastructure - GBXTeam */

@@ -20,9 +20,8 @@ import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.*;
 import net.minecraft.client.renderer.block.BlockRenderDispatcher;
 import net.minecraft.client.renderer.entity.*;
-//? if >= 1.21.10 {
-import net.minecraft.client.renderer.item.ItemModelResolver;
-import net.minecraft.client.renderer.item.ItemStackRenderState;
+import net.minecraft.client.renderer.entity.player.AvatarRenderer;
+import net.minecraft.client.renderer.entity.state.AvatarRenderState;
 //? if >= 1.21.11 {
 import net.minecraft.client.renderer.rendertype.RenderType;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
@@ -30,9 +29,11 @@ import net.minecraft.client.renderer.state.MapRenderState;
 //?} else {
 /*import net.minecraft.client.renderer.RenderType;
 *///?}
-import net.minecraft.client.renderer.entity.player.AvatarRenderer;
-import net.minecraft.client.renderer.entity.state.AvatarRenderState;
 //?} else {
+/*import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.entity.RenderLayerParent;
+import net.minecraft.client.renderer.entity.player.PlayerRenderer;
+*///?}
 /*import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
@@ -256,7 +257,7 @@ public class FirstPersonPlayerRenderer implements RenderLayerParent<AvatarRender
         ModelPart armPart = mdl.getArm(arm);
         nodeCollector.submitModelPart(armPart, poseStack, RenderTypes.entityTranslucent(skinTex), combinedLight, OverlayTexture.NO_OVERLAY, null);
         //?} else if >= 1.21.10 {
-        /*ModelPart armPart = ((FirstPersonPlayerRendererGetter)mdl).bfp$getModel();
+        /*ModelPart armPart = ((org.gbxteam.betterview.sys.bridge.FirstPersonPlayerRendererGetter)mdl).bfp$getModel();
         nodeCollector.submitModelPart(armPart, poseStack, net.minecraft.client.renderer.RenderType.entityTranslucent(skinTex), combinedLight, OverlayTexture.NO_OVERLAY, null);
         *///?} else {
         /*ModelPart armPart = mdl.bfp$getArm(arm);
@@ -328,8 +329,8 @@ public class FirstPersonPlayerRenderer implements RenderLayerParent<AvatarRender
     private static final RenderType BFP_MAP_BG_CHECKER = RenderTypes.text(ResourceLocation.withDefaultNamespace("textures/map/map_background_checkerboard.png"));
     private final MapRenderState bfp$mapState = new MapRenderState();
     //?} else if >= 1.21.10 {
-    /*private static final RenderType BFP_MAP_BG = RenderType.getText(ResourceLocation.withDefaultNamespace("textures/map/map_background.png"));
-    private static final RenderType BFP_MAP_BG_CHECKER = RenderType.getText(ResourceLocation.withDefaultNamespace("textures/map/map_background_checkerboard.png"));
+    /*private static final net.minecraft.client.renderer.RenderType BFP_MAP_BG = net.minecraft.client.renderer.RenderType.getText(ResourceLocation.withDefaultNamespace("textures/map/map_background.png"));
+    private static final net.minecraft.client.renderer.RenderType BFP_MAP_BG_CHECKER = net.minecraft.client.renderer.RenderType.getText(ResourceLocation.withDefaultNamespace("textures/map/map_background_checkerboard.png"));
     *///?} else {
     /*private static final RenderType BFP_MAP_BG = RenderType.text(new ResourceLocation("textures/map/map_background.png"));
     private static final RenderType BFP_MAP_BG_CHECKER = RenderType.text(new ResourceLocation("textures/map/map_background_checkerboard.png"));

@@ -6,4 +6,10 @@ import java.util.Optional;
 
 public interface FirstPersonPlayerRendererGetter {
     Optional<FirstPersonPlayerRenderer> bfp$getFirstPersonPlayerRenderer();
+    
+    //? if >= 1.21.10 {
+    default <M> M bfp$getModel() {
+        return null;
+    }
+    //?}
 }

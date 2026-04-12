@@ -23,9 +23,12 @@ import net.minecraft.client.renderer.entity.*;
 //? if >= 1.21.10 {
 import net.minecraft.client.renderer.item.ItemModelResolver;
 import net.minecraft.client.renderer.item.ItemStackRenderState;
+//? if >= 1.21.11 {
 import net.minecraft.client.renderer.rendertype.RenderType;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
-import net.minecraft.client.renderer.state.MapRenderState;
+//?} else {
+/*import net.minecraft.client.renderer.RenderType;
+*///?}
 import net.minecraft.client.renderer.entity.player.AvatarRenderer;
 import net.minecraft.client.renderer.entity.state.AvatarRenderState;
 //?} else {
@@ -121,7 +124,13 @@ public class FirstPersonPlayerRenderer implements RenderLayerParent<AvatarRender
         *///?}
 
         PlayerModel mdl = playerRenderer.getModel();
+        //? if >= 1.21.11 {
         ModelPart armPart = mdl.getArm(armSide);
+        //?} else if >= 1.21.10 {
+        /*ModelPart armPart = ((FirstPersonPlayerRendererGetter)playerRenderer).bfp$getModel();
+        *///?} else {
+        /*ModelPart armPart = mdl.bfp$getArm(armSide);
+        *///?}
         ((MatrixModelPart)(Object)armPart).bfp$setMatrix(armChannel.getTransform());
 
         poseStack.pushPose();
@@ -219,17 +228,20 @@ public class FirstPersonPlayerRenderer implements RenderLayerParent<AvatarRender
     }
 
     private void bfp$renderArmGeometry(AbstractClientPlayer player, PlayerModel mdl, HumanoidArm arm, PoseStack poseStack, SubmitNodeCollector nodeCollector, int combinedLight) {
-        //? if >= 1.21.10 {
+        //? if >= 1.21.11 {
         PlayerSkin skin = player.getSkin();
         boolean slimArms = skin.model() == PlayerModelType.SLIM;
         ResourceLocation skinTex = skin.body().texture();
-        //?} else {
+        //?} else if >= 1.21.10 {
+        /*PlayerSkin skin = player.getSkin();
+        boolean slimArms = skin.model() == PlayerModelType.SLIM;
+        ResourceLocation skinTex = skin.texture();
+        *///?} else {
         /*boolean slimArms = player.getModelName().equals("slim");
         ResourceLocation skinTex = player.getSkinTexture();
         *///?}
         boolean isLeft = arm == HumanoidArm.LEFT;
 
-        ModelPart armPart = mdl.getArm(arm);
         ModelPart sleevePart = isLeft ? mdl.leftSleeve : mdl.rightSleeve;
         PlayerModelPart sleeveFlag = isLeft ? PlayerModelPart.LEFT_SLEEVE : PlayerModelPart.RIGHT_SLEEVE;
 
@@ -239,10 +251,12 @@ public class FirstPersonPlayerRenderer implements RenderLayerParent<AvatarRender
         }
 
         sleevePart.visible = player.isModelPartShown(sleeveFlag);
-        //? if >= 1.21.10 {
+        //? if >= 1.21.11 {
+        ModelPart armPart = mdl.getArm(arm);
         nodeCollector.submitModelPart(armPart, poseStack, RenderTypes.entityTranslucent(skinTex), combinedLight, OverlayTexture.NO_OVERLAY, null);
         //?} else {
-        /*VertexConsumer consumer = nodeCollector.getBuffer(RenderType.entityTranslucent(skinTex));
+        /*ModelPart armPart = mdl.bfp$getArm(arm);
+        VertexConsumer consumer = nodeCollector.getBuffer(RenderType.entityTranslucent(skinTex));
         armPart.render(poseStack, consumer, combinedLight, OverlayTexture.NO_OVERLAY);
         *///?}
 
@@ -305,13 +319,13 @@ public class FirstPersonPlayerRenderer implements RenderLayerParent<AvatarRender
         return BuiltInRegistries.ITEM.getKey(stack.getItem()).getPath().contains("button");
     }
 
-    //? if >= 1.21.10 {
+    //? if >= 1.21.11 {
     private static final RenderType BFP_MAP_BG = RenderTypes.text(ResourceLocation.withDefaultNamespace("textures/map/map_background.png"));
     private static final RenderType BFP_MAP_BG_CHECKER = RenderTypes.text(ResourceLocation.withDefaultNamespace("textures/map/map_background_checkerboard.png"));
     private final MapRenderState bfp$mapState = new MapRenderState();
     //?} else {
-    /*private static final RenderType BFP_MAP_BG = RenderType.text(new ResourceLocation("textures/map/map_background.png"));
-    private static final RenderType BFP_MAP_BG_CHECKER = RenderType.text(new ResourceLocation("textures/map/map_background_checkerboard.png"));
+    /*private static final RenderType BFP_MAP_BG = RenderType.getText(ResourceLocation.withDefaultNamespace("textures/map/map_background.png"));
+    private static final RenderType BFP_MAP_BG_CHECKER = RenderType.getText(ResourceLocation.withDefaultNamespace("textures/map/map_background_checkerboard.png"));
     *///?}
 
     private void bfp$renderMapInHand(SubmitNodeCollector nodeCollector, PoseStack poseStack, ItemStack stack, int light) {

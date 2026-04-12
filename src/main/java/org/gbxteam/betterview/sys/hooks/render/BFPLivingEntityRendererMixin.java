@@ -41,6 +41,12 @@ public abstract class BFPLivingEntityRendererMixin<S extends EntityRenderState, 
     @Shadow protected M model;
     @Shadow public abstract @NotNull M getModel();
 
+    @Unique
+    @Override
+    public M bfp$getModel() {
+        return this.model;
+    }
+
     @Inject(method = "extractRenderState(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/client/renderer/entity/state/LivingEntityRenderState;F)V", at = @At("HEAD"))
     private <L extends Enum<L>> void bfp$extractAnimationPoseToRenderState(T livingEntity, R livingEntityRenderState, float partialTicks, CallbackInfo bfp_trace){
         // BFP Core: Reserved for future third-person animation pipeline integration.

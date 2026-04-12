@@ -43,7 +43,7 @@ dependencies {
 	// BFP Dependencies
 	autoImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
 	autoImplementation "dev.isxander:yet-another-config-lib:${project.yacl_version}-fabric"
-	autoImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
+	autoImplementation "maven.modrinth:modmenu:${project.modmenu_version}"
 	autoImplementation "maven.modrinth:sodium:${project.sodium_version}"
 
 	// Iris & Deps

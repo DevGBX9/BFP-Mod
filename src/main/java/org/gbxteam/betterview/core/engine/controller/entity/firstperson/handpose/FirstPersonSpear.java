@@ -195,10 +195,12 @@ public class FirstPersonSpear {
     public static void extractSpearData(LocalPlayer player, DriverGetter driverContainer, MontageManager montageManager) {
         BFPMultiVersionWrappers.bfp$updateSpearDrivers(player, driverContainer);
         for (InteractionHand hand : InteractionHand.values()) {
+            //? if >= 1.21.11 {
             int ticksSinceLastSpearImpact = (int) player.getTicksSinceLastKineticHitFeedback(0);
             if (ticksSinceLastSpearImpact == 1) {
                 montageManager.playMontage(FirstPersonMontages.SPEAR_CHARGE_IMPACT_MONTAGE);
             }
+            //?}
         }
     }
 

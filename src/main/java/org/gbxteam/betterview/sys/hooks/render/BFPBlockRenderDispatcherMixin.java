@@ -63,7 +63,7 @@ public abstract class BFPBlockRenderDispatcherMixin implements FirstPersonSingle
                 this.bfp$renderBakedQuad(quad, poseStack, nodeCollector, redFilter, greenFilter, blueFilter, bfpRenderLight, blockState);
             }
         }
-        Minecraft.getInstance().getModelManager().specialBlockModelRenderer().renderByBlock(blockState.getBlock(), ItemDisplayContext.NONE, poseStack, nodeCollector, bfpRenderLight, OverlayTexture.NO_OVERLAY, 0);
+        Minecraft.getInstance().getModelManager().specialBlockModelRenderer().get().renderByBlock(blockState.getBlock(), ItemDisplayContext.NONE, poseStack, nodeCollector, bfpRenderLight, OverlayTexture.NO_OVERLAY, 0);
     }
 
     @Unique
@@ -76,7 +76,7 @@ public abstract class BFPBlockRenderDispatcherMixin implements FirstPersonSingle
         RenderType activeLayer = (bakedQuad.shade() && blockState.getLightEmission() == 0) ? ItemBlockRenderTypes.getRenderType(blockState) : RenderTypes.cutoutMovingBlock();
         
         nodeCollector.submitCustomGeometry(poseStack, activeLayer, (matricesEntry, consumer) -> consumer.putBulkData(
-                matricesEntry, bakedQuad, new float[]{1, 1, 1, 1}, bfpR, bfpG, bfpB, 1.0f, new int[]{combinedLight, combinedLight, combinedLight, combinedLight}, OverlayTexture.NO_OVERLAY
+                matricesEntry, bakedQuad, new float[]{1, 1, 1, 1}, bfpR, bfpG, bfpB, 1.0f, new int[]{combinedLight, combinedLight, combinedLight, combinedLight}, OverlayTexture.NO_OVERLAY, true
         ));
         //?} else {
         /*RenderType activeLayer = (bakedQuad.isShade() && blockState.getLightEmission() == 0) ? ItemBlockRenderTypes.getRenderLayer(blockState, true) : RenderType.cutoutMipped();

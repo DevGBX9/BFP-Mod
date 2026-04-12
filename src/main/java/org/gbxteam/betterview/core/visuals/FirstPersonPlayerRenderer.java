@@ -37,8 +37,9 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.component.TypedDataComponent;
 //? if >= 1.21.10 {
-/*import net.minecraft.resources.Identifier;
-*///?} else {
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.ResourceLocation; // Fallback for some contexts
+//?} else {
 import net.minecraft.resources.ResourceLocation;
 //?}
 import net.minecraft.util.Mth;
@@ -127,9 +128,9 @@ public class FirstPersonPlayerRenderer implements RenderLayerParent<AvatarRender
         poseStack.mulPose(Axis.ZP.rotationDegrees(180));
         this.bfp$renderArmGeometry(player, mdl, armSide, poseStack, nodeCollector, combinedLight);
 
-        Identifier genericPoseId = animData.getDriverValue(FirstPersonDrivers.getGenericItemPoseDriver(hand));
+        ResourceLocation genericPoseId = animData.getDriverValue(FirstPersonDrivers.getGenericItemPoseDriver(hand));
         FirstPersonGenericItems.GenericItemPoseDefinition genericDef = FirstPersonGenericItems.getOrThrowFromIdentifier(genericPoseId);
-        Identifier handPoseId = animData.getDriverValue(FirstPersonDrivers.getHandPoseDriver(hand));
+        ResourceLocation handPoseId = animData.getDriverValue(FirstPersonDrivers.getHandPoseDriver(hand));
         FirstPersonHandPoses.HandPoseDefinition handDef = FirstPersonHandPoses.getOrThrowFromIdentifier(handPoseId);
         ItemRenderType renderType = handPoseId == FirstPersonHandPoses.GENERIC_ITEM ? genericDef.itemRenderType() : handDef.itemRenderType();
 
@@ -172,12 +173,12 @@ public class FirstPersonPlayerRenderer implements RenderLayerParent<AvatarRender
 
                             boolean isLeftHanded = this.bfp$mc.options.mainHand().get() == HumanoidArm.LEFT;
 
-                            Identifier lGenericId = animData.getDriverValue(FirstPersonDrivers.getGenericItemPoseDriver(isLeftHanded ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND));
-                            Identifier rGenericId = animData.getDriverValue(FirstPersonDrivers.getGenericItemPoseDriver(!isLeftHanded ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND));
+                            ResourceLocation lGenericId = animData.getDriverValue(FirstPersonDrivers.getGenericItemPoseDriver(isLeftHanded ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND));
+                            ResourceLocation rGenericId = animData.getDriverValue(FirstPersonDrivers.getGenericItemPoseDriver(!isLeftHanded ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND));
                             FirstPersonGenericItems.GenericItemPoseDefinition lGenericDef = FirstPersonGenericItems.getOrThrowFromIdentifier(lGenericId);
                             FirstPersonGenericItems.GenericItemPoseDefinition rGenericDef = FirstPersonGenericItems.getOrThrowFromIdentifier(rGenericId);
-                            Identifier lPoseId = animData.getDriverValue(FirstPersonDrivers.getHandPoseDriver(isLeftHanded ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND));
-                            Identifier rPoseId = animData.getDriverValue(FirstPersonDrivers.getHandPoseDriver(!isLeftHanded ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND));
+                            ResourceLocation lPoseId = animData.getDriverValue(FirstPersonDrivers.getHandPoseDriver(isLeftHanded ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND));
+                            ResourceLocation rPoseId = animData.getDriverValue(FirstPersonDrivers.getHandPoseDriver(!isLeftHanded ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND));
                             FirstPersonHandPoses.HandPoseDefinition lHandDef = FirstPersonHandPoses.getOrThrowFromIdentifier(lPoseId);
                             FirstPersonHandPoses.HandPoseDefinition rHandDef = FirstPersonHandPoses.getOrThrowFromIdentifier(rPoseId);
 
@@ -221,7 +222,7 @@ public class FirstPersonPlayerRenderer implements RenderLayerParent<AvatarRender
         //? if >= 1.21.10 {
         PlayerSkin skin = player.getSkin();
         boolean slimArms = skin.model() == PlayerModelType.SLIM;
-        Identifier skinTex = skin.body().texturePath();
+        ResourceLocation skinTex = skin.body().texture();
         //?} else {
         /*boolean slimArms = player.getModelName().equals("slim");
         ResourceLocation skinTex = player.getSkinTexture();
@@ -305,8 +306,8 @@ public class FirstPersonPlayerRenderer implements RenderLayerParent<AvatarRender
     }
 
     //? if >= 1.21.10 {
-    private static final RenderType BFP_MAP_BG = RenderTypes.text(Identifier.withDefaultNamespace("textures/map/map_background.png"));
-    private static final RenderType BFP_MAP_BG_CHECKER = RenderTypes.text(Identifier.withDefaultNamespace("textures/map/map_background_checkerboard.png"));
+    private static final RenderType BFP_MAP_BG = RenderTypes.text(ResourceLocation.withDefaultNamespace("textures/map/map_background.png"));
+    private static final RenderType BFP_MAP_BG_CHECKER = RenderTypes.text(ResourceLocation.withDefaultNamespace("textures/map/map_background_checkerboard.png"));
     private final MapRenderState bfp$mapState = new MapRenderState();
     //?} else {
     /*private static final RenderType BFP_MAP_BG = RenderType.text(new ResourceLocation("textures/map/map_background.png"));

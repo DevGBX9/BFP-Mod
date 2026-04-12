@@ -85,5 +85,4 @@ public abstract class BFPBlockRenderDispatcherMixin implements FirstPersonSingle
         ));
         *///?}
     }
-    }
 }

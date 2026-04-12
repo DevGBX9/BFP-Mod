@@ -13,9 +13,7 @@ public class BFPMultiVersionWrappers {
     public static ItemUseAnimation bfp$resolveTridentAnimation() {
         //? if >= 1.21.11 {
         return ItemUseAnimation.TRIDENT;
-        //?} else if >= 1.21.10 {
-        /*return ItemUseAnimation.SPEAR;
-        *///?} else {
+        //?} else {
         /*return ItemUseAnimation.SPEAR;
         *///?}
     }

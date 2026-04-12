@@ -26,6 +26,7 @@ import net.minecraft.client.renderer.item.ItemStackRenderState;
 //? if >= 1.21.11 {
 import net.minecraft.client.renderer.rendertype.RenderType;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
+import net.minecraft.client.renderer.state.MapRenderState;
 //?} else {
 /*import net.minecraft.client.renderer.RenderType;
 *///?}
@@ -254,7 +255,10 @@ public class FirstPersonPlayerRenderer implements RenderLayerParent<AvatarRender
         //? if >= 1.21.11 {
         ModelPart armPart = mdl.getArm(arm);
         nodeCollector.submitModelPart(armPart, poseStack, RenderTypes.entityTranslucent(skinTex), combinedLight, OverlayTexture.NO_OVERLAY, null);
-        //?} else {
+        //?} else if >= 1.21.10 {
+        /*ModelPart armPart = ((FirstPersonPlayerRendererGetter)mdl).bfp$getModel();
+        nodeCollector.submitModelPart(armPart, poseStack, net.minecraft.client.renderer.RenderType.entityTranslucent(skinTex), combinedLight, OverlayTexture.NO_OVERLAY, null);
+        *///?} else {
         /*ModelPart armPart = mdl.bfp$getArm(arm);
         VertexConsumer consumer = nodeCollector.getBuffer(RenderType.entityTranslucent(skinTex));
         armPart.render(poseStack, consumer, combinedLight, OverlayTexture.NO_OVERLAY);
@@ -323,9 +327,12 @@ public class FirstPersonPlayerRenderer implements RenderLayerParent<AvatarRender
     private static final RenderType BFP_MAP_BG = RenderTypes.text(ResourceLocation.withDefaultNamespace("textures/map/map_background.png"));
     private static final RenderType BFP_MAP_BG_CHECKER = RenderTypes.text(ResourceLocation.withDefaultNamespace("textures/map/map_background_checkerboard.png"));
     private final MapRenderState bfp$mapState = new MapRenderState();
-    //?} else {
+    //?} else if >= 1.21.10 {
     /*private static final RenderType BFP_MAP_BG = RenderType.getText(ResourceLocation.withDefaultNamespace("textures/map/map_background.png"));
     private static final RenderType BFP_MAP_BG_CHECKER = RenderType.getText(ResourceLocation.withDefaultNamespace("textures/map/map_background_checkerboard.png"));
+    *///?} else {
+    /*private static final RenderType BFP_MAP_BG = RenderType.text(new ResourceLocation("textures/map/map_background.png"));
+    private static final RenderType BFP_MAP_BG_CHECKER = RenderType.text(new ResourceLocation("textures/map/map_background_checkerboard.png"));
     *///?}
 
     private void bfp$renderMapInHand(SubmitNodeCollector nodeCollector, PoseStack poseStack, ItemStack stack, int light) {

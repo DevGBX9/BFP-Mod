@@ -10,7 +10,7 @@ import net.minecraft.client.gui.components.debug.DebugScreenEntry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.chunk.LevelChunk;
-//? if >= 1.21.10 {
+//? if >= 1.21.11 {
 import org.jspecify.annotations.Nullable;
 //?} else {
 /*import javax.annotation.Nullable;

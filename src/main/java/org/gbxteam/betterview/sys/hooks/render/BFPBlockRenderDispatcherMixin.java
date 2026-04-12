@@ -12,8 +12,13 @@ import net.minecraft.client.renderer.block.BlockRenderDispatcher;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.BlockModelPart;
 import net.minecraft.client.renderer.block.model.BlockStateModel;
+//? if >= 1.21.10 {
 import net.minecraft.client.renderer.rendertype.RenderType;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
+//?} else {
+/*import net.minecraft.client.renderer.RenderType;
+import org.gbxteam.betterview.core.utils.BFPRenderTypeWrappers; // Assuming we might need a wrapper or just use standard
+*///?}
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
@@ -67,10 +72,18 @@ public abstract class BFPBlockRenderDispatcherMixin implements FirstPersonSingle
         float bfpG = bakedQuad.isTinted() ? Mth.clamp(g, 0.0f, 1.0f) : 1.0f;
         float bfpB = bakedQuad.isTinted() ? Mth.clamp(b, 0.0f, 1.0f) : 1.0f;
 
+        //? if >= 1.21.10 {
         RenderType activeLayer = (bakedQuad.shade() && blockState.getLightEmission() == 0) ? ItemBlockRenderTypes.getRenderType(blockState) : RenderTypes.cutoutMovingBlock();
         
         nodeCollector.submitCustomGeometry(poseStack, activeLayer, (matricesEntry, consumer) -> consumer.putBulkData(
                 matricesEntry, bakedQuad, new float[]{1, 1, 1, 1}, bfpR, bfpG, bfpB, 1.0f, new int[]{combinedLight, combinedLight, combinedLight, combinedLight}, OverlayTexture.NO_OVERLAY
         ));
+        //?} else {
+        /*RenderType activeLayer = (bakedQuad.isShade() && blockState.getLightEmission() == 0) ? ItemBlockRenderTypes.getRenderLayer(blockState, true) : RenderType.cutoutMipped();
+        nodeCollector.submitCustomGeometry(poseStack, activeLayer, (matricesEntry, consumer) -> consumer.putBulkData(
+                matricesEntry, bakedQuad, bfpR, bfpG, bfpB, combinedLight, OverlayTexture.NO_OVERLAY
+        ));
+        *///?}
+    }
     }
 }

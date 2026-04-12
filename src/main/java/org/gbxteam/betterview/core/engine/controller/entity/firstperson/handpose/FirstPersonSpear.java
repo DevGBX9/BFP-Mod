@@ -17,7 +17,7 @@ import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.component.KineticWeapon;
+import org.gbxteam.betterview.core.utils.BFPMultiVersionWrappers;
 
 import java.util.Set;
 
@@ -193,18 +193,8 @@ public class FirstPersonSpear {
     }
 
     public static void extractSpearData(LocalPlayer player, DriverGetter driverContainer, MontageManager montageManager) {
+        BFPMultiVersionWrappers.bfp$updateSpearDrivers(player, driverContainer);
         for (InteractionHand hand : InteractionHand.values()) {
-            ItemStack itemStack = player.getItemInHand(hand);
-            KineticWeapon kineticWeapon = itemStack.get(DataComponents.KINETIC_WEAPON);
-            if (kineticWeapon == null) {
-                continue;
-            }
-            int spearUseDuration = itemStack.getUseDuration(player) - (player.getUseItemRemainingTicks() + 1);
-            int delayTicks = kineticWeapon.delayTicks();
-            driverContainer.getDriver(FirstPersonDrivers.SPEAR_CAN_DISMOUNT).setValue(spearUseDuration < kineticWeapon.dismountConditions().map(KineticWeapon.Condition::maxDurationTicks).orElse(0).floatValue() - delayTicks);
-            driverContainer.getDriver(FirstPersonDrivers.SPEAR_CAN_KNOCKBACK).setValue(spearUseDuration < kineticWeapon.knockbackConditions().map(KineticWeapon.Condition::maxDurationTicks).orElse(0).floatValue() - delayTicks);
-            driverContainer.getDriver(FirstPersonDrivers.SPEAR_CAN_DAMAGE).setValue(spearUseDuration < kineticWeapon.damageConditions().map(KineticWeapon.Condition::maxDurationTicks).orElse(0).floatValue() - delayTicks);
-
             int ticksSinceLastSpearImpact = (int) player.getTicksSinceLastKineticHitFeedback(0);
             if (ticksSinceLastSpearImpact == 1) {
                 montageManager.playMontage(FirstPersonMontages.SPEAR_CHARGE_IMPACT_MONTAGE);

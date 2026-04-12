@@ -1,6 +1,11 @@
 package org.gbxteam.betterview.core.utils;
 
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUseAnimation;
+//? if >= 1.21.11 {
+import net.minecraft.world.item.component.KineticWeapon;
+//?}
 
 public class BFPMultiVersionWrappers {
 
@@ -8,7 +13,9 @@ public class BFPMultiVersionWrappers {
     public static ItemUseAnimation bfp$resolveTridentAnimation() {
         //? if >= 1.21.11 {
         return ItemUseAnimation.TRIDENT;
-        //?} else {
+        //?} else if >= 1.21.10 {
+        /*return ItemUseAnimation.SPEAR;
+        *///?} else {
         /*return ItemUseAnimation.SPEAR;
         *///?}
     }
@@ -20,5 +27,22 @@ public class BFPMultiVersionWrappers {
         //?} else {
         /*throw new RuntimeException("1.21.11 feature attempted to be used in older version");
          *///?}
+    }
+
+    public static void bfp$updateSpearDrivers(net.minecraft.client.player.LocalPlayer player, org.gbxteam.betterview.core.context.DriverGetter driverContainer) {
+        for (InteractionHand hand : InteractionHand.values()) {
+            ItemStack itemStack = player.getItemInHand(hand);
+            //? if >= 1.21.11 {
+            KineticWeapon kineticWeapon = itemStack.get(net.minecraft.core.component.DataComponents.KINETIC_WEAPON);
+            if (kineticWeapon == null) {
+                continue;
+            }
+            int spearUseDuration = itemStack.getUseDuration(player) - (player.getUseItemRemainingTicks() + 1);
+            int delayTicks = kineticWeapon.delayTicks();
+            driverContainer.getDriver(org.gbxteam.betterview.core.engine.controller.entity.firstperson.FirstPersonDrivers.SPEAR_CAN_DISMOUNT).setValue(spearUseDuration < kineticWeapon.dismountConditions().map(KineticWeapon.Condition::maxDurationTicks).orElse(0).floatValue() - delayTicks);
+            driverContainer.getDriver(org.gbxteam.betterview.core.engine.controller.entity.firstperson.FirstPersonDrivers.SPEAR_CAN_KNOCKBACK).setValue(spearUseDuration < kineticWeapon.knockbackConditions().map(KineticWeapon.Condition::maxDurationTicks).orElse(0).floatValue() - delayTicks);
+            driverContainer.getDriver(org.gbxteam.betterview.core.engine.controller.entity.firstperson.FirstPersonDrivers.SPEAR_CAN_DAMAGE).setValue(spearUseDuration < kineticWeapon.damageConditions().map(KineticWeapon.Condition::maxDurationTicks).orElse(0).floatValue() - delayTicks);
+            //?}
+        }
     }
 }

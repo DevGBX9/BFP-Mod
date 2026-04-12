@@ -42,9 +42,8 @@ public abstract class BFPLivingEntityRendererMixin<S extends EntityRenderState, 
     @Shadow public abstract @NotNull M getModel();
 
     @Unique
-    @Override
-    public M bfp$getModel() {
-        return this.model;
+    public <T_MODEL> T_MODEL bfp$getModel() {
+        return (T_MODEL) this.model;
     }
 
     @Inject(method = "extractRenderState(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/client/renderer/entity/state/LivingEntityRenderState;F)V", at = @At("HEAD"))

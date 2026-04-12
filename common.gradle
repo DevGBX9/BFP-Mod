@@ -1,0 +1,123 @@
+final int mcVersion = project.mcVersion
+final boolean unobfuscated = mcVersion >= 26_00_00
+
+apply plugin: 'maven-publish'
+apply plugin: 'com.github.hierynomus.license'
+apply plugin: unobfuscated ? 'net.fabricmc.fabric-loom' : 'net.fabricmc.fabric-loom-remap'
+apply plugin: 'com.replaymod.preprocess'
+apply plugin: 'me.fallenbreath.yamlang'
+
+repositories {
+	maven { url = 'https://maven.parchmentmc.org' }
+	maven { url = 'https://maven.terraformersmc.com/' }
+	maven { url = 'https://maven.isxander.dev/releases' }
+	maven { url = 'https://api.modrinth.com/maven' }
+	maven { url = 'https://maven.gegy.dev/releases/' }
+	maven { url = 'https://jitpack.io' }
+}
+
+dependencies {
+	def processDependency = { dep ->
+		if (dep instanceof ModuleDependency) {
+			if (!(dep.group == 'net.fabricmc' && dep.name == 'fabric-loader')) {
+				dep.exclude group: 'net.fabricmc', module: 'fabric-loader'
+			}
+		}
+		return dep
+	}
+	def autoImplementation = { Object... args -> processDependency(unobfuscated ? implementation(*args) : modImplementation(*args)) }
+	def autoRuntimeOnly = { Object... args -> processDependency(unobfuscated ? runtimeOnly(*args) : modRuntimeOnly(*args)) }
+
+	// loom
+	minecraft "com.mojang:minecraft:${project.minecraft_version}"
+	if (!unobfuscated) {
+		mappings loom.layered() {
+			officialMojangMappings()
+			if (project.parchment_version.size() > 0) {
+				parchment("org.parchmentmc.data:parchment-${project.minecraft_version}:${project.parchment_version}@zip")
+			}
+		}
+	}
+	autoImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+
+	// BFP Dependencies
+	autoImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+	autoImplementation "dev.isxander:yet-another-config-lib:${project.yacl_version}-fabric"
+	autoImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
+	autoImplementation "maven.modrinth:sodium:${project.sodium_version}"
+
+	// Iris & Deps
+	autoImplementation "maven.modrinth:iris:${project.iris_version}"
+	autoRuntimeOnly "org.antlr:antlr4-runtime:4.13.1"
+	autoRuntimeOnly "io.github.douira:glsl-transformer:2.0.1"
+	autoRuntimeOnly "org.anarres:jcpp:1.4.14"
+}
+
+JavaVersion JAVA_COMPATIBILITY
+if (mcVersion >= 12005) {
+	JAVA_COMPATIBILITY = JavaVersion.VERSION_21
+} else if (mcVersion >= 11800) {
+	JAVA_COMPATIBILITY = JavaVersion.VERSION_17
+} else {
+	JAVA_COMPATIBILITY = JavaVersion.VERSION_1_8
+}
+
+loom {
+	runConfigs.configureEach {
+		ideConfigGenerated = true
+		runDir '../../run'
+	}
+}
+
+processResources {
+	def modProperties = [
+			"id"                  : project.mod_id,
+			"name"                : project.mod_name,
+			"version"             : project.mod_version,
+			"minecraft_dependency": project.minecraft_dependency,
+			"description"         : project.mod_description
+	]
+	inputs.properties(modProperties)
+
+	filesMatching("fabric.mod.json") {
+		expand modProperties
+	}
+}
+
+tasks.withType(JavaCompile).configureEach {
+	options.encoding = "UTF-8"
+	options.compilerArgs << "-Xlint:deprecation" << "-Xlint:unchecked"
+}
+
+java {
+	sourceCompatibility = JAVA_COMPATIBILITY
+	targetCompatibility = JAVA_COMPATIBILITY
+	withSourcesJar()
+}
+
+jar {
+	from(rootProject.file('LICENSE')) {
+		rename { "${it}_${project.mod_id}" }
+	}
+}
+
+license {
+	header = rootProject.file('HEADER.txt')
+	include '**/*.java'
+	skipExistingHeaders = true
+	ext {
+		name = project.mod_name
+		author = 'GBXTeam'
+		year = Calendar.getInstance().get(Calendar.YEAR).toString()
+	}
+}
+
+publishing {
+	publications {
+		mavenJava(MavenPublication) {
+			from components.java
+			artifactId = project.mod_id
+			version = project.mod_version
+		}
+	}
+}

@@ -1,0 +1,42 @@
+{
+  "bfp.config.yacl_not_found.header": "API za postavke nije instaliran",
+  "bfp.config.yacl_not_found.description": "BFP koristi konfiguracijsku datoteku \"YetAnotherConfigLib\" da stvori zaslon za postavke unutar igrice. To nije nužna datoteka, ali mora biti instalirana ako želite imati zaslon za postavke unutar igre. Inače morate postaviti postavke sami u .minecraft/config/bfp.json",
+  "bfp.config.yacl_not_found.close": "Zatvori",
+
+  "bfp.config.title": "Postavke BFPa",
+  "bfp.config.category.general.name": "Opće postavke",
+  "bfp.config.category.general.tooltip": "Opće postavke za sve animacije",
+  "bfp.config.category.first_person_player.name": "Igrač iz Prvog Lica",
+  "bfp.config.category.first_person_player.tooltip": "Postavke animacija igrača iz prvog lica",
+
+  "bfp.config.option.enable_first_person_renderer.name": "Animacije Prvog Lica",
+  "bfp.config.option.enable_first_person_renderer.description": "Određuje hoće li se koristiti BFP animacije igrača prvog lica. Za razliku od većine ostalih animacija, ove imaju svoj vlastiti renderer koji potpuno zamjenjuje Vanilla renderer prvog lica. Isključite ovu opciju da biste koristili Vanilla renderer prvog lica, ili radi kompatibilnosti s modovima koji koriste Vanilla renderer.",
+  "bfp.config.option.enable_first_person_renderer.enabled": "Uključeno",
+  "bfp.config.option.enable_first_person_renderer.disabled": "Isključeno",
+
+  "bfp.config.group.first_person_camera_shake.name": "Drhtanje Kamere",
+  "bfp.config.group.first_person_camera_shake.description": "Postavke za podešavanje jačine drhtanja kamere.",
+  "bfp.config.option.first_person_camera_shake_intensity_master.name": "Jačina",
+  "bfp.config.option.first_person_camera_shake_intensity_master.description": "Podešava jačinu drhtanja kamere za sve animacije",
+  "bfp.config.option.first_person_camera_shake_intensity_movement.name": "Jačina Kretanja",
+  "bfp.config.option.first_person_camera_shake_intensity_movement.description": "Podešava jačinu drhtanja kamere za animacije pokreta, uključujući 'Realistično kretanje'.",
+  "bfp.config.option.first_person_camera_shake_intensity_item_interactions.name": "Jačina Interakcija Predmeta",
+  "bfp.config.option.first_person_camera_shake_intensity_item_interactions.description": "Podešava jačinu drhtanja kamere za animacije interakcija sa predmetima, uključujući rudarenje i udaranje.",
+
+  "bfp.config.group.first_person_arm_camera_damping.name": "Ublaživanje Micanja Kamere Ruke",
+  "bfp.config.group.first_person_arm_camera_damping.description": "Postavke za podešavanje micanja ruke tijekom micanja kamere.",
+  "bfp.config.option.enable_first_person_arm_camera_damping.name": "Uključeno",
+  "bfp.config.option.enable_first_person_arm_camera_damping.description": "Određuje hoće li ublaživanje ruke prvog lica biti uključeno ili isključeno. Ako je isključeno ruke se neće uopće micati micanjem kamere.",
+  "bfp.config.option.first_person_arm_camera_damping_factor.name": "Jačina Ublažavanja",
+  "bfp.config.option.first_person_arm_camera_damping_factor.description": "Podešava koliko tromost animacije. Što je veća jačina ublažavanja to manje odskaću.",
+  "bfp.config.option.first_person_arm_camera_stiffness_factor.name": "Jačina Tromosti",
+  "bfp.config.option.first_person_arm_camera_stiffness_factor.description": "Podešava brzinu micanja ruku kako bi se prilagodile micanju kamere.",
+
+  "bfp.config.option.first_person_mining_speed.name": "Povečanje Brzine Animacije Kopanja",
+  "bfp.config.option.first_person_mining_speed.description": "Podešava brzinu animacija kopanja i rudarenja. 1 je normalna brzina, 0.5 is pola normalne brzine i 2 je duplo brže.",
+
+  "bfp.config.group.first_person_map.name": "Predmeti Karte",
+  "bfp.config.group.first_person_map.description": "Postavke prikazivanja i animacija karte.",
+  "bfp.config.option.first_person_map_movement_animation_intensity.name": "Jačina Animacije Micanja Karte",
+  "bfp.config.option.first_person_map_movement_animation_intensity.description": "Podešava jačinu animacija micanja dok držite kartu. Manja jačina pomaže sa čitanjem karte."
+}

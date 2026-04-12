@@ -1,0 +1,5 @@
+/*
+ * Better First Person (BFP)
+ * Developed and maintained by GBXTeam.
+ * Copyright (c) 2026 GBXTeam. All rights reserved.
+ */

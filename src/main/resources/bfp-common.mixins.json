@@ -1,0 +1,40 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "org.gbxteam.betterview.sys.hooks",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+  ],
+  "client": [
+    "debug.BFPDefaultPlayerSkinMixin",
+    "debug.BFPDebugScreenOverlayMixin",
+    "game.BFPHandSwingMixin",
+    "game.BFPLevelChunkMixin",
+    "game.BFPMinecraftMixin",
+    "game.BFPMultiPlayerGameModeMixin",
+    "item.BFPBlocksAttacksMixin",
+    "item.BFPItemInHandLayerMixin",
+    "item.BFPItemTransformMixin",
+    "item.property.BFPCrossbowPullMixin",
+    "item.property.BFPIsUsingItemMixin",
+    "item.property.BFPUseCycleMixin",
+    "item.property.BFPUseDurationMixin",
+    "render.BFPBlockRenderDispatcherMixin",
+    "render.BFPEntityRenderDispatcherMixin",
+    "render.BFPFishingHookRendererMixin",
+    "render.BFPGameRendererMixin",
+    "render.BFPItemInHandRendererMixin",
+    "render.BFPLayerDefinitionsMixin",
+    "render.BFPLivingEntityRenderStateMixin",
+    "render.BFPLivingEntityRendererMixin",
+    "render.BFPModelFeatureRendererMixin",
+    "render.BFPModelPartMixin",
+    "render.block_entity.BFPChestRendererMixin",
+    "render.block_entity.BFPShulkerBoxRendererMixin",
+    "render.layer.BFPCapeLayerMixin",
+    "render.layer.BFPElytraLayerMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

@@ -10,11 +10,12 @@ import net.minecraft.client.gui.components.debug.DebugScreenEntry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.chunk.LevelChunk;
-//? if >= 1.21.11 {
-import org.jspecify.annotations.Nullable;
+//? if >= 12111 {
+import org.jetbrains.annotations.Nullable;
 //?} else {
-/*import javax.annotation.Nullable;
+/*import org.jetbrains.annotations.Nullable;
 *///?}
+
 
 import java.util.Comparator;
 import java.util.List;

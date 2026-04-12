@@ -1,1 +1,2 @@
 accessWidener v2 named
+accessible method net/minecraft/client/model/HumanoidModel getArm (Lnet/minecraft/world/entity/HumanoidArm;)Lnet/minecraft/client/model/geom/ModelPart;

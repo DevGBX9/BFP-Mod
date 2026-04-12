@@ -42,6 +42,7 @@ public abstract class BFPLivingEntityRendererMixin<S extends EntityRenderState, 
     @Shadow public abstract @NotNull M getModel();
 
     @Unique
+    @SuppressWarnings("unchecked")
     public <T_MODEL> T_MODEL bfp$getModel() {
         return (T_MODEL) this.model;
     }

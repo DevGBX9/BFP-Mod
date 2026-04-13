@@ -12,6 +12,7 @@
   "icon": "assets/bfp/icon.png",
 
   "environment": "client",
+  "accessWidener": "bfp.accesswidener",
   "entrypoints": {
     "client": [
       "org.gbxteam.betterview.BFPFabric"

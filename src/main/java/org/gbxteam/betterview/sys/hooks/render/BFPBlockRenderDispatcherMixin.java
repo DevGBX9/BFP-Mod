@@ -12,9 +12,9 @@ import net.minecraft.client.renderer.block.BlockRenderDispatcher;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.BlockModelPart;
 import net.minecraft.client.renderer.block.model.BlockStateModel;
-//? if >= 12111 {
+//? if mc >= 12111 {
 import net.minecraft.client.renderer.RenderType;
-//?} else if >= 12110 {
+//?} else if mc >= 12110 {
 /*import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
 *///?} else {
@@ -66,7 +66,7 @@ public abstract class BFPBlockRenderDispatcherMixin implements FirstPersonSingle
                 this.bfp$renderBakedQuad(quad, poseStack, nodeCollector, redFilter, greenFilter, blueFilter, bfpRenderLight, blockState);
             }
         }
-        //? if >= 12111 {
+        //? if mc >= 12111 {
         Minecraft.getInstance().getModelManager().specialBlockModelRenderer().get().renderByBlock(blockState.getBlock(), ItemDisplayContext.NONE, poseStack, nodeCollector, bfpRenderLight, OverlayTexture.NO_OVERLAY, 0);
         //?} else {
         /*Minecraft.getInstance().getBlockEntityRenderDispatcher().renderItem(blockState.getBlock().asItem().getDefaultInstance(), ItemDisplayContext.NONE, combinedLight, OverlayTexture.NO_OVERLAY, poseStack, nodeCollector, null, 0);
@@ -80,13 +80,13 @@ public abstract class BFPBlockRenderDispatcherMixin implements FirstPersonSingle
         float bfpG = bakedQuad.isTinted() ? Mth.clamp(g, 0.0f, 1.0f) : 1.0f;
         float bfpB = bakedQuad.isTinted() ? Mth.clamp(b, 0.0f, 1.0f) : 1.0f;
 
-        //? if >= 12111 {
+        //? if mc >= 12111 {
         RenderType activeLayer = (bakedQuad.shade() && blockState.getLightEmission() == 0) ? ItemBlockRenderTypes.getRenderType(blockState) : RenderType.cutoutMovingBlock();
         
         nodeCollector.submitCustomGeometry(poseStack, activeLayer, (matricesEntry, consumer) -> consumer.putBulkData(
                 matricesEntry, bakedQuad, new float[]{1, 1, 1, 1}, bfpR, bfpG, bfpB, 1.0f, new int[]{combinedLight, combinedLight, combinedLight, combinedLight}, OverlayTexture.NO_OVERLAY, true
         ));
-        //?} else if >= 12110 {
+        //?} else if mc >= 12110 {
         /*RenderType activeLayer = (bakedQuad.isShade() && blockState.getLightEmission() == 0) ? ItemBlockRenderTypes.getRenderLayer(blockState, true) : RenderType.cutoutMipped();
         nodeCollector.submitCustomGeometry(poseStack, activeLayer, (matricesEntry, consumer) -> consumer.putBulkData(
                 matricesEntry, bakedQuad, bfpR, bfpG, bfpB, combinedLight, OverlayTexture.NO_OVERLAY

@@ -22,11 +22,13 @@ import net.minecraft.client.renderer.block.BlockRenderDispatcher;
 import net.minecraft.client.renderer.entity.*;
 import net.minecraft.client.renderer.entity.player.AvatarRenderer;
 import net.minecraft.client.renderer.entity.state.AvatarRenderState;
-//? if >= 12111 {
+//? if mc >= 12111 {
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
+import net.minecraft.client.renderer.state.MapRenderState;
+//?} else if mc >= 12110 {
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.state.MapRenderState;
-//?} else if >= 12110 {
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 //?} else {
 /*import net.minecraft.client.renderer.RenderType;
@@ -37,7 +39,7 @@ import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.component.TypedDataComponent;
-//? if >= 1.21.10 {
+//? if mc >= 12110 {
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.resources.ResourceLocation; // Fallback for some contexts
 //?} else {
@@ -48,9 +50,12 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.PlayerModelPart;
-//? if >= 12110 {
+//? if mc >= 12111 {
 import net.minecraft.client.renderer.item.ItemModelResolver;
 import net.minecraft.client.renderer.item.ItemStackRenderState;
+import net.minecraft.world.entity.player.PlayerModelType;
+import net.minecraft.world.entity.player.PlayerSkin;
+//?} else if mc >= 12110 {
 import net.minecraft.world.entity.player.PlayerModelType;
 import net.minecraft.world.entity.player.PlayerSkin;
 //?}
@@ -67,7 +72,7 @@ import org.joml.Vector3f;
 
 import java.util.Objects;
 
-//? if >= 12110 {
+//? if mc >= 12110 {
 public class FirstPersonPlayerRenderer implements RenderLayerParent<AvatarRenderState, PlayerModel> {
 //?} else {
 /*public class FirstPersonPlayerRenderer implements RenderLayerParent<AbstractClientPlayer, PlayerModel> {
@@ -79,7 +84,7 @@ public class FirstPersonPlayerRenderer implements RenderLayerParent<AvatarRender
     private final EntityRenderDispatcher bfp$renderDispatcher;
     private final ItemRenderer bfp$itemRenderer;
     private final BlockRenderDispatcher bfp$blockRenderer;
-    //? if >= 12110 {
+    //? if mc >= 12111 {
     private final ItemModelResolver bfp$itemModelResolver;
     //?}
 
@@ -95,7 +100,7 @@ public class FirstPersonPlayerRenderer implements RenderLayerParent<AvatarRender
         this.bfp$renderDispatcher = ctx.getEntityRenderDispatcher();
         this.bfp$itemRenderer = bfp$mc.getItemRenderer();
         this.bfp$blockRenderer = ctx.getBlockRenderDispatcher();
-        //? if >= 12110 {
+        //? if mc >= 12111 {
         this.bfp$itemModelResolver = ctx.getItemModelResolver();
         //?}
 
@@ -121,16 +126,16 @@ public class FirstPersonPlayerRenderer implements RenderLayerParent<AvatarRender
         JointChannel armChannel = animPose.getJointChannel(FirstPersonJointAnimator.getArmJoint(armSide));
         JointChannel itemChannel = animPose.getJointChannel(FirstPersonJointAnimator.getItemJoint(armSide));
 
-        //? if >= 1.21.10 {
+        //? if mc >= 12110 {
         AvatarRenderer<@NotNull AbstractClientPlayer> playerRenderer = this.bfp$renderDispatcher.getPlayerRenderer(player);
         //?} else {
         /*PlayerRenderer playerRenderer = (PlayerRenderer)this.bfp$renderDispatcher.getRenderer(player);
         *///?}
 
         PlayerModel mdl = playerRenderer.getModel();
-        //? if >= 12111 {
+        //? if mc >= 12111 {
         ModelPart armPart = mdl.getArm(armSide);
-        //?} else if >= 12110 {
+        //?} else if mc >= 12110 {
         /*ModelPart armPart = ((org.gbxteam.betterview.sys.bridge.FirstPersonPlayerRendererGetter)playerRenderer).bfp$getModel();
         *///?} else {
         /*ModelPart armPart = mdl.bfp$getArm(armSide);
@@ -169,7 +174,7 @@ public class FirstPersonPlayerRenderer implements RenderLayerParent<AvatarRender
                             poseStack.pushPose();
                             poseStack.mulPose(Axis.ZP.rotationDegrees(180));
 
-                            //? if >= 12110 {
+                            //? if mc >= 12110 {
                             AvatarRenderer<AbstractClientPlayer> playerRenderer = this.bfp$renderDispatcher.getPlayerRenderer(player);
                             //?} else {
                             /*PlayerRenderer playerRenderer = (PlayerRenderer)this.bfp$renderDispatcher.getRenderer(player);
@@ -234,11 +239,11 @@ public class FirstPersonPlayerRenderer implements RenderLayerParent<AvatarRender
     }
 
     private void bfp$renderArmGeometry(AbstractClientPlayer player, PlayerModel mdl, HumanoidArm arm, PoseStack poseStack, SubmitNodeCollector nodeCollector, int combinedLight) {
-        //? if >= 12111 {
+        //? if mc >= 12111 {
         PlayerSkin skin = player.getSkin();
         boolean slimArms = skin.model() == PlayerModelType.SLIM;
         ResourceLocation skinTex = skin.body().texture();
-        //?} else if >= 12110 {
+        //?} else if mc >= 12110 {
         /*PlayerSkin skin = player.getSkin();
         boolean slimArms = skin.model() == PlayerModelType.SLIM;
         ResourceLocation skinTex = skin.texture();
@@ -258,10 +263,10 @@ public class FirstPersonPlayerRenderer implements RenderLayerParent<AvatarRender
         }
 
         sleevePart.visible = player.isModelPartShown(sleeveFlag);
-        //? if >= 12111 {
+        //? if mc >= 12111 {
         ModelPart armPart = mdl.getArm(arm);
         nodeCollector.submitModelPart(armPart, poseStack, RenderType.entityTranslucent(skinTex), combinedLight, OverlayTexture.NO_OVERLAY, null);
-        //?} else if >= 12110 {
+        //?} else if mc >= 12110 {
         /*ModelPart armPart = ((org.gbxteam.betterview.sys.bridge.FirstPersonPlayerRendererGetter)mdl).bfp$getModel();
         nodeCollector.submitModelPart(armPart, poseStack, net.minecraft.client.renderer.RenderType.entityTranslucent(skinTex), combinedLight, OverlayTexture.NO_OVERLAY, null);
         *///?} else {
@@ -296,7 +301,7 @@ public class FirstPersonPlayerRenderer implements RenderLayerParent<AvatarRender
         switch (renderType) {
             case MAP -> this.bfp$renderMapInHand(nodeCollector, poseStack, stack, combinedLight);
             case THIRD_PERSON_ITEM, MIRRORED_THIRD_PERSON_ITEM, ON_SHELF -> {
-                //? if >= 12110 {
+                //? if mc >= 12111 {
                 ItemDisplayContext displayCtx = renderType.getItemDisplayContext(side);
                 ItemStackRenderState renderState = new ItemStackRenderState();
                 this.bfp$itemModelResolver.updateForTopItem(renderState, stack, displayCtx, entity.level(), entity, entity.getId() + displayCtx.ordinal());
@@ -331,13 +336,14 @@ public class FirstPersonPlayerRenderer implements RenderLayerParent<AvatarRender
         return BuiltInRegistries.ITEM.getKey(stack.getItem()).getPath().contains("button");
     }
 
-    //? if >= 12111 {
-    private static final RenderType BFP_MAP_BG = RenderType.text(ResourceLocation.withDefaultNamespace("textures/map/map_background.png"));
-    private static final RenderType BFP_MAP_BG_CHECKER = RenderType.text(ResourceLocation.withDefaultNamespace("textures/map/map_background_checkerboard.png"));
+    //? if mc >= 12111 {
+    private static final RenderType BFP_MAP_BG = RenderTypes.text(ResourceLocation.withDefaultNamespace("textures/map/map_background.png"));
+    private static final RenderType BFP_MAP_BG_CHECKER = RenderTypes.text(ResourceLocation.withDefaultNamespace("textures/map/map_background_checkerboard.png"));
     private final MapRenderState bfp$mapState = new MapRenderState();
-    //?} else if >= 12110 {
+    //?} else if mc >= 12110 {
     /*private static final net.minecraft.client.renderer.RenderType BFP_MAP_BG = net.minecraft.client.renderer.RenderType.getText(ResourceLocation.withDefaultNamespace("textures/map/map_background.png"));
     private static final net.minecraft.client.renderer.RenderType BFP_MAP_BG_CHECKER = net.minecraft.client.renderer.RenderType.getText(ResourceLocation.withDefaultNamespace("textures/map/map_background_checkerboard.png"));
+    private final MapRenderState bfp$mapState = new MapRenderState();
     *///?} else {
     /*private static final RenderType BFP_MAP_BG = RenderType.text(new ResourceLocation("textures/map/map_background.png"));
     private static final RenderType BFP_MAP_BG_CHECKER = RenderType.text(new ResourceLocation("textures/map/map_background_checkerboard.png"));
@@ -365,7 +371,7 @@ public class FirstPersonPlayerRenderer implements RenderLayerParent<AvatarRender
 
         if (mapData != null) {
             MapRenderer mapRenderer = this.bfp$mc.getMapRenderer();
-            //? if >= 12110 {
+            //? if mc >= 12110 {
             mapRenderer.extractRenderState(mapId, mapData, this.bfp$mapState);
             mapRenderer.render(this.bfp$mapState, poseStack, nodeCollector, false, light);
             //?} else {

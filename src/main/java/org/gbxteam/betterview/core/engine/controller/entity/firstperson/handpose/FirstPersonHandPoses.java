@@ -189,7 +189,7 @@ public class FirstPersonHandPoses {
             .setLowerSequence(FirstPersonMovementFlows.HAND_TOOL_LOWER)
             .setItemRenderType(ItemRenderType.MAP)
             .build());
-    //? if >= 1.21.11 {
+    //? if mc >= 12111 {
     public static final Identifier SPEAR = register(BFPMain.makeIdentifier("spear"), HandPoseDefinition.builder(
             "spear",
             FirstPersonSpear::constructSpearPoseFunction,

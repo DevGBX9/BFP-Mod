@@ -80,7 +80,7 @@ public class FirstPersonAttackAnimations {
                     70)
             .setDoesAnimationOffsetOffHand(true)
             .build());
-    //? if >= 1.21.11 {
+    //? if mc >= 12111 {
     public static final Identifier SPEAR_JAB = register(BFPMain.makeIdentifier("spear_jab"), AttackAnimationRule.builder(
             FirstPersonMontages.HAND_SPEAR_JAB_MONTAGE,
             context -> context.item().getUseAnimation() == BFPMultiVersionWrappers.bfp$resolveSpearAnimation(),

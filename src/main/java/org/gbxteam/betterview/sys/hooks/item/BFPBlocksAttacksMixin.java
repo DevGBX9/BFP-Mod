@@ -1,6 +1,6 @@
 package org.gbxteam.betterview.sys.hooks.item;
 
-//? if >= 1.21.5 {
+//? if mc >= 12105 {
 
 import org.gbxteam.betterview.core.engine.controller.JointAnimatorDispatcher;
 import org.gbxteam.betterview.core.engine.controller.entity.firstperson.FirstPersonDrivers;

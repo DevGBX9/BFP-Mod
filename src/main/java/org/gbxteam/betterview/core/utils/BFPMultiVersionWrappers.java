@@ -3,7 +3,7 @@ package org.gbxteam.betterview.core.utils;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUseAnimation;
-//? if >= 12111 {
+//? if mc >= 12111 {
 import net.minecraft.world.item.component.KineticWeapon;
 //?}
 
@@ -12,7 +12,7 @@ public class BFPMultiVersionWrappers {
 
     /** Resolves the correct trident animation type across MC versions. */
     public static ItemUseAnimation bfp$resolveTridentAnimation() {
-        //? if >= 12111 {
+        //? if mc >= 12111 {
         return ItemUseAnimation.TRIDENT;
         //?} else {
         /*return ItemUseAnimation.SPEAR;
@@ -22,7 +22,7 @@ public class BFPMultiVersionWrappers {
 
     /** Resolves the new spear animation type (1.21.11+). */
     public static ItemUseAnimation bfp$resolveSpearAnimation() {
-        //? if >= 12111 {
+        //? if mc >= 12111 {
         return ItemUseAnimation.SPEAR;
         //?} else {
         /*throw new RuntimeException("1.21.11 feature attempted to be used in older version");
@@ -33,7 +33,7 @@ public class BFPMultiVersionWrappers {
     public static void bfp$updateSpearDrivers(net.minecraft.client.player.LocalPlayer player, org.gbxteam.betterview.core.context.DriverGetter driverContainer) {
         for (InteractionHand hand : InteractionHand.values()) {
             ItemStack itemStack = player.getItemInHand(hand);
-            //? if >= 12111 {
+            //? if mc >= 12111 {
             net.minecraft.world.item.component.KineticWeapon kineticWeapon = itemStack.get(net.minecraft.core.component.DataComponents.KINETIC_WEAPON);
             if (kineticWeapon == null) {
                 continue;

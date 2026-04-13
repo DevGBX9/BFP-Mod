@@ -15,19 +15,9 @@ plugins {
 preprocess {
 	strictExtraMappings = false
 
-	def mc12111 = createNode('1.21.11', 1_21_11, '')
-	def mc12110 = createNode('1.21.10', 1_21_10, '')
-	def mc1218 = createNode('1.21.8', 1_21_08, '')
-	def mc1215 = createNode('1.21.5', 1_21_05, '')
-	def mc1214 = createNode('1.21.4', 1_21_04, '')
-
-	mc1215.link(mc1214, null)
-	mc1218.link(mc1215, null)
-	mc12110.link(mc1218, null)
-	mc12111.link(mc12110, null)
+	def mc12111 = createNode('1.21.11', 12111, '')
 
 	for (final def node in getNodes()) {
-		node.getVariables().put('mc', node.mcVersion)
 		findProject(node.project).ext.mcVersion = node.mcVersion
 	}
 }

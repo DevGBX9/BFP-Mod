@@ -27,8 +27,8 @@ preprocess {
 	mc12111.link(mc12110, null)
 
 	for (final def node in getNodes()) {
+		node.getVariables().put('mc', node.mcVersion)
 		findProject(node.project).ext.mcVersion = node.mcVersion
-		node.vars.put('mc', node.mcVersion)
 	}
 }
 

@@ -24,7 +24,7 @@ import net.minecraft.client.renderer.entity.player.AvatarRenderer;
 import net.minecraft.client.renderer.entity.state.AvatarRenderState;
 //? if mc >= 12111 {
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.rendertype.RenderTypes;
+import net.minecraft.client.renderer.RenderTypes;
 import net.minecraft.client.renderer.state.MapRenderState;
 //?} else if mc >= 12110 {
 import net.minecraft.client.renderer.RenderType;

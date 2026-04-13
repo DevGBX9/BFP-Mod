@@ -17,6 +17,9 @@ preprocess {
 
 	def mc12111 = createNode('1.21.11', 12111, '')
 
+	// Defining mc globally to fix preprocessor logic
+	getVariables().put('mc', 12111)
+
 	for (final def node in getNodes()) {
 		findProject(node.project).ext.mcVersion = node.mcVersion
 	}
